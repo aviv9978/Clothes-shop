@@ -23,24 +23,31 @@
             >Sopping Cart</a
           >
         </li>
-        <li><a routerLink="/" class="nav-link px-2 link-dark">Customers</a></li>
-        <li><a routerLink="/" class="nav-link px-2 link-dark">Products</a></li>
+        <li *ngIf="!(auth.user$ | async)">
+          <a routerLink="/login" class="nav-link px-2 link-dark">Login</a>
+        </li>
       </ul>
 
-      <div ngbDropdown class="dropdown text-end">
+      <div
+        *ngIf="auth.user$ | async as user"
+        ngbDropdown
+        class="dropdown text-end"
+      >
         <a
           ngbDropdownToggle
           class="d-block link-dark text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown"
           aria-expanded="true"
         >
-          <img
-            src="https://github.com/mdo.png"
+          {{ user.displayName }}
+          <!-- <img
+            *ngIf="user.photoURL"
+            src="{{ user.photoURL }}"
             alt="mdo"
             width="32"
             height="32"
             class="rounded-circle"
-          />
+          /> -->
         </a>
         <ul
           ngbDropdownMenu
@@ -61,7 +68,9 @@
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
-          <li><a class="dropdown-item">Log Out</a></li>
+          <li>
+            <a class="dropdown-item" (click)="logout()">Log Out</a>
+          </li>
         </ul>
       </div>
     </div>
