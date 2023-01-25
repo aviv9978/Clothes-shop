@@ -1,0 +1,45 @@
+<div class="container">
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Some kind of title for product"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          placeholder="Some kind of price for product"
+        />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-control" id="category">
+        <option value=""></option>
+        <option *ngFor="let c of categories$ | async" value="c.key">
+          {{ c.data.name }}
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="imgUrl" class="form-label">Image URL</label>
+      <input
+        type="text"
+        class="form-control"
+        id="imgUrl"
+        placeholder="Some kind of Image Url for product"
+      />
+    </div>
+
+    <button class="btn btn-primary">Save</button>
+  </form>
+</div>

@@ -22,6 +22,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserService } from './shared/services/database/user.service';
 import { AdminAuthGaurdService as AdminAuthGaurd } from './shared/services/authentication/admin-auth-gaurd.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './shared/services/database/category.service';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { AdminAuthGaurdService as AdminAuthGaurd } from './shared/services/authe
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,11 @@ import { AdminAuthGaurdService as AdminAuthGaurd } from './shared/services/authe
         canActivate: [AuthGuard, AdminAuthGaurd],
       },
       {
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuard, AdminAuthGaurd],
+      },
+      {
         path: 'admin/orders',
         component: AdminOrdersComponent,
         canActivate: [AuthGuard, AdminAuthGaurd],
@@ -74,7 +82,7 @@ import { AdminAuthGaurdService as AdminAuthGaurd } from './shared/services/authe
     ]),
     NgbModule,
   ],
-  providers: [AuthService, AuthGuard, UserService, AdminAuthGaurd],
+  providers: [AuthService, AuthGuard, UserService, AdminAuthGaurd,CategoryService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
