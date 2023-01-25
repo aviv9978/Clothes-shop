@@ -23,23 +23,19 @@
             >Sopping Cart</a
           >
         </li>
-        <li *ngIf="!(auth.user$ | async)">
+        <li *ngIf="!appUser">
           <a routerLink="/login" class="nav-link px-2 link-dark">Login</a>
         </li>
       </ul>
 
-      <div
-        *ngIf="auth.user$ | async as user"
-        ngbDropdown
-        class="dropdown text-end"
-      >
+      <div *ngIf="appUser" ngbDropdown class="dropdown text-end">
         <a
           ngbDropdownToggle
           class="d-block link-dark text-decoration-none dropdown-toggle"
           data-bs-toggle="dropdown"
           aria-expanded="true"
         >
-          {{ user.displayName }}
+          {{ appUser.name }}
           <!-- <img
             *ngIf="user.photoURL"
             src="{{ user.photoURL }}"
@@ -57,16 +53,18 @@
           <li>
             <a class="dropdown-item" routerLink="/my/orders">My orders</a>
           </li>
-          <li>
-            <a class="dropdown-item" routerLink="/admin/orders"
-              >Manage Orders</a
-            >
-          </li>
-          <li>
-            <a class="dropdown-item" routerLink="/admin/products"
-              >Manage Products</a
-            >
-          </li>
+          <ng-container *ngIf="appUser.isAdmin">
+            <li>
+              <a class="dropdown-item" routerLink="/admin/orders"
+                >Manage Orders</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="/admin/products"
+                >Manage Products</a
+              >
+            </li>
+          </ng-container>
           <li><hr class="dropdown-divider" /></li>
           <li>
             <a class="dropdown-item" (click)="logout()">Log Out</a>
