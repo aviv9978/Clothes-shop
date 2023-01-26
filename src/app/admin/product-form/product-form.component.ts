@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
 export class ProductFormComponent {
   categories$;
   product: Product | any = [];
-
+  id: string | null;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -21,17 +21,26 @@ export class ProductFormComponent {
   ) {
     this.categories$ = categoryService.getCategories();
 
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id)
+    this.id = this.route.snapshot.paramMap.get('id');
+    if (this.id)
       this.productService
-        .getProduct(id)
+        .getProduct(this.id)
         .valueChanges()
         .pipe(take(1))
         .subscribe((p) => (this.product = p!));
   }
 
   save(product: any) {
-    this.productService.create(product);
+    if (this.id) this.productService.update(this.id, product);
+    else this.productService.create(product);
+
     this.router.navigate(['/admin/products']);
+  }
+
+  delete() {
+    if (!confirm('Are you sure you want to delete this product?')) return;
+    
+    this.router.navigate(['/admin/products']);
+    this.productService.delete(this.id!);
   }
 }

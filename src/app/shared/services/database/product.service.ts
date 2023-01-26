@@ -22,12 +22,20 @@ export class ProductService {
       .snapshotChanges()
       .pipe(
         map((actions) =>
-          actions.map((a) => ({ key: a.payload.key, ...a.payload.val() }))
+        actions.map(a => ({ key: a.key, ...a.payload.val() } as Product))
         )
       );
   }
 
   getProduct(productId: string): AngularFireObject<Product> {
     return this.db.object(`/products/${productId}`);
+  }
+
+  update(productId: string, product: Product) {
+    return this.db.object(`/products/${productId}`).update(product);
+  }
+
+  delete(productId: string) {
+    return this.db.object(`/products/${productId}`).remove();
   }
 }

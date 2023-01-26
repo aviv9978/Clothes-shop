@@ -6,9 +6,7 @@ import { Product } from 'src/app/shared/models/product';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
   @Input('product') product: Product | any = [];
   constructor() {}
-
-  ngOnInit(): void {}
 }
