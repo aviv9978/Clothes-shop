@@ -5,7 +5,7 @@
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input
-            ngModel
+            [(ngModel)]="product.title"
             name="title"
             #title="ngModel"
             type="text"
@@ -27,7 +27,7 @@
           <div class="input-group">
             <span class="input-group-text">$</span>
             <input
-              ngModel
+              [(ngModel)]="product.price"
               name="price"
               #price="ngModel"
               required
@@ -54,7 +54,7 @@
           <select
             class="form-control"
             id="category"
-            ngModel
+            [(ngModel)]="product.category"
             name="category"
             #category="ngModel"
             required
@@ -75,7 +75,7 @@
         <div class="mb-3">
           <label for="imgUrl" class="form-label">Image URL</label>
           <input
-            ngModel
+            [(ngModel)]="product.imageUrl"
             name="imageUrl"
             #imgUrl="ngModel"
             required
@@ -104,14 +104,13 @@
     </div>
     <div class="col-sm">
       <div class="card" style="width: 18rem">
-        <img [src]="imgUrl.value" class="card-img-top" />
+        <img [src]="product.imageUrl" class="card-img-top" />
         <div class="card-body">
-          <h5 class="card-title">{{ title.value }}</h5>
+          <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">
-            {{ price.value | currency : "USD" : true }}
+            {{ product.price | currency : "USD" }}
           </p>
-          <!--           <a href="#" class="btn btn-primary">Go somewhere</a>
- -->
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
     </div>
