@@ -27,6 +27,7 @@ import { CategoryService } from './shared/services/database/category.service';
 import { ProductService } from './shared/services/database/product.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CustomFormsModule } from 'ng2-validation';
     AdminProductsComponent,
     AdminOrdersComponent,
     ProductFormComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
