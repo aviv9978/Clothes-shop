@@ -28,6 +28,7 @@ import { ProductService } from './shared/services/database/product.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { DataTablesModule } from 'angular-datatables';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
   ],
   imports: [
     BrowserModule,
+    DataTablesModule,
     FormsModule,
     CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
