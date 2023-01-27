@@ -1,34 +1,58 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from 'src/app/shared/models/product';
 import { CategoryService } from '../../shared/services/database/category.service';
 import { ProductService } from '../../shared/services/database/product.service';
-
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css'],
 })
-export class AdminProductsComponent implements OnDestroy {
+export class AdminProductsComponent implements OnInit, OnDestroy {
   products?: Product[];
   filteredProducts?: Product[];
-  subscriptions: Subscription;
+  subscriptions?: Subscription;
 
-  constructor(private productService: ProductService) {
+  displayedColumns: string[] = ['title', 'price', 'edit'];
+  dataSource!: MatTableDataSource<Product>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private productService: ProductService) {}
+  ngOnInit(): void {
     this.subscriptions = this.productService.getAll().subscribe((products) => {
       this.products = this.filteredProducts = products;
+      this.dataSource = new MatTableDataSource(
+        products.map((product) => {
+          const { imageUrl, ...rest } = product;
+          return rest as Product;
+        })
+      );
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
-  //
-  filter(query: string) {
-    this.filteredProducts = query
-      ? this.products?.filter((product) =>
-          product.title.toLowerCase().includes(query.toLowerCase())
-        )
-      : this.products;
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
+    this.subscriptions?.unsubscribe();
   }
 }
