@@ -7,6 +7,6 @@ import { Product } from 'src/app/shared/models/product';
   styleUrls: ['./product-card.component.css'],
 })
 export class ProductCardComponent {
-  @Input('product') product: Product | any = [];
+  @Input('product') product: Product | any  = [];
   constructor() {}
 }

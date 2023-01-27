@@ -15,11 +15,15 @@ export class AppComponent {
     private userService: UserService
   ) {
     auth.user$.subscribe((user) => {
-      if (user) {
-        userService.save(user);
-        let returnUrl = localStorage.getItem('returnUrl') as string;
-        router.navigateByUrl(returnUrl);
-      }
+      if (!user) return;
+
+      userService.save(user);
+
+      let returnUrl = localStorage.getItem('returnUrl') as string;
+      if (!returnUrl) return;
+
+      localStorage.removeItem('returnUrl');
+      router.navigateByUrl(returnUrl);
     });
   }
 }

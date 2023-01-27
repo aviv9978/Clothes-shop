@@ -22,13 +22,14 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   filteredProducts?: Product[];
   subscriptions?: Subscription;
 
-  displayedColumns: string[] = ['title', 'price', 'edit'];
+  displayedColumns: string[] = ['title', 'category', 'price', 'edit'];
   dataSource!: MatTableDataSource<Product>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private productService: ProductService) {}
+
   ngOnInit(): void {
     this.subscriptions = this.productService.getAll().subscribe((products) => {
       this.products = this.filteredProducts = products;
@@ -38,6 +39,12 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
           return rest as Product;
         })
       );
+      this.dataSource.filterPredicate = (data: any, filter: string) => {
+        return (
+          data.title.toLowerCase().includes(filter) ||
+          data.category.toLowerCase().includes(filter)
+        );
+      };
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
