@@ -28,7 +28,8 @@ import { ProductService } from './shared/services/database/product.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { ProductCardComponent } from './components/product-card/product-card.component';
-import { DataTablesModule } from 'angular-datatables';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialsModule } from './modules/angular-materials/angular-materials.module';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,6 @@ import { DataTablesModule } from 'angular-datatables';
   ],
   imports: [
     BrowserModule,
-    DataTablesModule,
     FormsModule,
     CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -95,6 +95,8 @@ import { DataTablesModule } from 'angular-datatables';
       },
     ]),
     NgbModule,
+    AngularMaterialsModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     AuthService,
