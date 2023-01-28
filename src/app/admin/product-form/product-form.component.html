@@ -61,7 +61,7 @@
           >
             <option value=""></option>
             <option *ngFor="let c of categories$ | async" [value]="c.key">
-              {{ c.data.name }}
+              {{ c.name }}
             </option>
           </select>
           <div

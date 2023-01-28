@@ -31,23 +31,25 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.subscriptions = this.productService.getAll().subscribe((products) => {
-      this.products = this.filteredProducts = products;
-      this.dataSource = new MatTableDataSource(
-        products.map((product) => {
-          const { imageUrl, ...rest } = product;
-          return rest as Product;
-        })
-      );
-      this.dataSource.filterPredicate = (data: any, filter: string) => {
-        return (
-          data.title.toLowerCase().includes(filter) ||
-          data.category.toLowerCase().includes(filter)
+    this.subscriptions = this.productService
+      .getProducts()
+      .subscribe((products) => {
+        this.products = this.filteredProducts = products;
+        this.dataSource = new MatTableDataSource(
+          products.map((product) => {
+            const { imageUrl, ...rest } = product;
+            return rest as Product;
+          })
         );
-      };
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+        this.dataSource.filterPredicate = (data: any, filter: string) => {
+          return (
+            data.title.toLowerCase().includes(filter) ||
+            data.category.toLowerCase().includes(filter)
+          );
+        };
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   }
 
   applyFilter(event: Event) {

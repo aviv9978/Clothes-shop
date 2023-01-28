@@ -16,13 +16,13 @@ export class ProductService {
     return this.db.list('/products').push(product);
   }
 
-  getAll() {
+  getProducts() {
     return this.db
       .list<Product>('/products')
       .snapshotChanges()
       .pipe(
         map((actions) =>
-        actions.map(a => ({ key: a.key, ...a.payload.val() } as Product))
+          actions.map((a) => ({ key: a.key, ...a.payload.val() } as Product))
         )
       );
   }
