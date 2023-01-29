@@ -3,6 +3,9 @@ import { ProductService } from '../../shared/services/database/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/shared/models/product';
 import { switchMap } from 'rxjs/operators';
+import { ShoppingCartService } from '../../shared/services/database/shopping-cart.service';
+import { Observable } from 'rxjs';
+import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 
 @Component({
   selector: 'app-products',
@@ -13,13 +16,15 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category?: string | null;
-
+  cart$?: Observable<ShoppingCart>;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private shoppingCartService: ShoppingCartService
   ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.cart$ = await this.shoppingCartService.getCart(); 
     this.placeProducts();
   }
 

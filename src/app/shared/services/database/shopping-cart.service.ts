@@ -3,10 +3,11 @@ import {
   AngularFireDatabase,
   AngularFireObject,
 } from '@angular/fire/compat/database';
-import { take } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { Product } from '../../models/product';
 import 'firebase/compat/database';
 import { ShoppingCartItem } from '../../models/shopping-cart-item';
+import { ShoppingCart } from '../../models/shopping-cart';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,19 @@ export class ShoppingCartService {
 
   addToCart(product: Product) {
     this.updateItem(product, 1);
+  }
+
+  async getCart(): Promise<Observable<ShoppingCart>> {
+    const cartId = await this.getOrCreateCartId();
+
+    return this.db
+      .object('/shopping-carts/' + cartId)
+      .valueChanges()
+      .pipe(
+        map((x) =>
+          x ? new ShoppingCart((x as any).items) : new ShoppingCart(x as any)
+        )
+      );
   }
 
   removeFromCart(product: Product) {
@@ -38,30 +52,26 @@ export class ShoppingCartService {
             title: product.title,
             imageUrl: product.imageUrl,
             price: product.price,
-            quantity,
+            quantity: quantity,
           });
       });
   }
-  private async getOrCreateCartId() {
-    let cartId = localStorage.getItem('cartId');
+  private async getOrCreateCartId(): Promise<string> {
+    const cartId = localStorage.getItem('cartId');
+
     if (cartId) return cartId;
 
-    let result = await this.create();
+    const result = await this.create();
     localStorage.setItem('cartId', result.key!);
     return result.key!;
   }
 
-  private getCart(cartId: string) {
-    return this.db.object('/shopping-carts/' + cartId);
-  }
-
-  getItem(
-    cartId: string,
+  private getItem(
+    cartId?: string,
     productId?: string
   ): AngularFireObject<ShoppingCartItem> {
-    return this.db.object('/shopping-cart' + cartId + '/items/' + productId);
+    return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
-
   private create() {
     return this.db.list('/shopping-carts').push({
       dateCreated: new Date().getTime(),

@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './modules/angular-materials/angular-materials.module';
 import { ProductsFilterComponent } from './components/products/products-filter/products-filter.component';
 import { ShoppingCartService } from './shared/services/database/shopping-cart.service';
+import { ProductQuantityComponent } from './components/products/product-quantity/product-quantity.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ShoppingCartService } from './shared/services/database/shopping-cart.se
     ProductFormComponent,
     ProductCardComponent,
     ProductsFilterComponent,
+    ProductQuantityComponent,
 
   ],
   imports: [

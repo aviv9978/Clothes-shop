@@ -6,28 +6,21 @@
       {{ product.price | currency : "USD" }}
     </p>
   </div>
-  <div class="card-footer d-grid gap-2">
+  <div *ngIf="showActions && shoppingCart" class="card-footer d-grid gap-2">
     <button
-      *ngIf="showActions"
+      *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
       (click)="addToCart(product)"
-      class="btn btn-primary"
+      class="btn btn-primary btn-block"
     >
       Add to Cart
     </button>
+    <ng-template #updateQuantity>
+      <product-quantity
+        [product]="product"
+        [shopping-cart]="shoppingCart"
+      ></product-quantity>
+    </ng-template>
   </div>
 </div>
 
-<!-- <mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{ product.title }}</mat-card-title>
-  </mat-card-header>
-  <img mat-card-image [src]="product.imageUrl" alt="Photo of {{product.title}}">
-  <mat-card-content>
-    <p>
-     {{product.price | currency : "USD" }}
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <ng-content select=".addButton"></ng-content>
-  </mat-card-actions>
-</mat-card> -->
+
