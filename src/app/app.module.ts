@@ -27,12 +27,12 @@ import { CategoryService } from './shared/services/database/category.service';
 import { ProductService } from './shared/services/database/product.service';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { ProductCardComponent } from './components/product-card/product-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './modules/angular-materials/angular-materials.module';
 import { ProductsFilterComponent } from './components/products/products-filter/products-filter.component';
 import { ShoppingCartService } from './shared/services/database/shopping-cart.service';
 import { ProductQuantityComponent } from './components/products/product-quantity/product-quantity.component';
+import { ProductCardComponent } from './components/products/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,6 @@ import { ProductQuantityComponent } from './components/products/product-quantity
     ProductCardComponent,
     ProductsFilterComponent,
     ProductQuantityComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -111,7 +110,7 @@ import { ProductQuantityComponent } from './components/products/product-quantity
     AdminAuthGaurd,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
   ],
   bootstrap: [AppComponent],
 })
