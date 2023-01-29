@@ -1,18 +1,18 @@
 <section class="bg-light pt-5 pb-5 shadow-sm">
   <div class="container">
     <div class="row">
-      <div class="col-2 ">
-        <products-filter class="sticky-top" [category]="category"></products-filter>
+      <div class="col-2">
+        <products-filter
+          class="sticky-top"
+          [category]="category"
+        ></products-filter>
       </div>
 
       <div class="col">
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <ng-container *ngFor="let product of filteredProducts">
             <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-evenly">
-              <product-card [product]="product">
-                <ng-container class="addButton  gap-2">
-                  <a href="#" class="btn btn-primary">Add to Cart </a>
-                </ng-container>
+              <product-card [show-actions]="true" [product]="product">
               </product-card>
             </div>
           </ng-container>

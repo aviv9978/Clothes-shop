@@ -1,19 +1,21 @@
-  <div class="card" style="width: 18rem;">
-    <img
-      [src]="product.imageUrl"
-      class="card-img-top"
-      *ngIf="product.imageUrl"
-    />
-    <div class="card-body">
-      <h1 class="card-title">{{ product.title }}</h1>
-      <p class="card-text">
-        {{ product.price | currency : "USD" }}
-      </p>     
-    </div>
-    <div class="card-footer d-grid gap-2">
-      <ng-content select=".addButton"></ng-content>
-    </div>
+<div class="card" style="width: 18rem">
+  <img [src]="product.imageUrl" class="card-img-top" *ngIf="product.imageUrl" />
+  <div class="card-body">
+    <h1 class="card-title">{{ product.title }}</h1>
+    <p class="card-text">
+      {{ product.price | currency : "USD" }}
+    </p>
   </div>
+  <div class="card-footer d-grid gap-2">
+    <button
+      *ngIf="showActions"
+      (click)="addToCart(product)"
+      class="btn btn-primary"
+    >
+      Add to Cart
+    </button>
+  </div>
+</div>
 
 <!-- <mat-card class="example-card">
   <mat-card-header>

@@ -31,6 +31,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialsModule } from './modules/angular-materials/angular-materials.module';
 import { ProductsFilterComponent } from './components/products/products-filter/products-filter.component';
+import { ShoppingCartService } from './shared/services/database/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { ProductsFilterComponent } from './components/products/products-filter/p
     AdminAuthGaurd,
     CategoryService,
     ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent],
 })

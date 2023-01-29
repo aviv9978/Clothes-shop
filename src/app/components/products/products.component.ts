@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/shared/models/product';
 import { switchMap } from 'rxjs/operators';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -13,15 +12,18 @@ import { switchMap } from 'rxjs/operators';
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  category?: string | null ;
+  category?: string | null;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
   ) {}
+
   ngOnInit(): void {
     this.placeProducts();
   }
+
+
 
   private placeProducts() {
     this.productService
