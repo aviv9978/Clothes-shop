@@ -5,25 +5,38 @@
     <table class="table">
       <thead>
         <tr class="sticky-top bg-white">
-          <th scope="col">Product</th>
-          <th style="width: 230px" scope="col">Quantity</th>
-          <th class="text-right" style="width: 200px">Price</th>
+          <th scope="col" class="col-md-1"></th>
+          <th scope="col" class="col-md-4">Product</th>
+          <th scope="col" class="text-center col-md-4">Quantity</th>
+          <th scope="col" class="text-right" >Price</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of cart.items">
-          <td>{{ product.title }}</td>
-          <td>{{ product.quantity }}</td>
-          <td>{{ product.totalPrice | currency : "USD" }}</td>
+        <tr *ngFor="let item of cart.items">
+          <td>
+            <img class="img-thumbnail rounded-circle" [src]=item.imageUrl>
+          </td>
+          <td>{{ item.title }}</td>
+          <td  style="padding-top: 31px;">
+            <product-quantity
+              [shopping-cart]="cart"
+              [product]="item"
+            ></product-quantity>
+          </td>
+          <td>{{ item.totalPrice | currency : "USD" }}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td></td>
           <td></td>
+          <td></td>
           <th>{{ cart.totalPrice | currency : "USD" }}</th>
         </tr>
       </tfoot>
     </table>
+    <button (click)="clearCart()" class="btn btn-danger btn-sm">
+      Clear Shopping Cart
+    </button>
   </ng-container>
 </div>

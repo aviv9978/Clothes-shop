@@ -29,7 +29,6 @@ export class ProductsComponent implements OnInit {
   }
 
 
-
   private placeProducts() {
     this.productService
       .getProducts()

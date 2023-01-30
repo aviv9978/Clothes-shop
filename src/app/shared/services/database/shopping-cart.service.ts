@@ -19,6 +19,8 @@ export class ShoppingCartService {
     this.updateItem(product, 1);
   }
 
+  
+
   async getCart(): Promise<Observable<ShoppingCart>> {
     const cartId = await this.getOrCreateCartId();
 
@@ -34,6 +36,11 @@ export class ShoppingCartService {
 
   removeFromCart(product: Product) {
     this.updateItem(product, -1);
+  }
+
+  async clearCart() {
+    const cartId = await this.getOrCreateCartId();
+    this.db.object('/shopping-carts/' + cartId + '/items').remove();
   }
 
   private async updateItem(product: Product, change: number) {
@@ -58,7 +65,6 @@ export class ShoppingCartService {
   }
   private async getOrCreateCartId(): Promise<string> {
     const cartId = localStorage.getItem('cartId');
-
     if (cartId) return cartId;
 
     const result = await this.create();
@@ -72,6 +78,7 @@ export class ShoppingCartService {
   ): AngularFireObject<ShoppingCartItem> {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
+
   private create() {
     return this.db.list('/shopping-carts').push({
       dateCreated: new Date().getTime(),
