@@ -1,29 +1,41 @@
 <div class="container mt-4">
   <h1>Shopping Cart</h1>
   <ng-container *ngIf="cart$ | async as cart">
-    <p>You have {{ cart.totalItemsCount }} items in your shopping cart.</p>
+    <p>You have {{ cart.totalItemsCount }} items in your shopping cart.
+      <button
+      *ngIf="cart.items.length"
+      (click)="clearCart()"
+      class="btn btn-light btn-sm"
+    >
+      Clear Shopping Cart
+    </button>
+    </p>
+    
     <table class="table">
       <thead>
         <tr class="sticky-top bg-white">
           <th scope="col" class="col-md-1"></th>
-          <th scope="col" class="col-md-4">Product</th>
-          <th scope="col" class="text-center col-md-4">Quantity</th>
-          <th scope="col" class="text-right" >Price</th>
+          <th scope="col" class="col-sm-4">Product</th>
+          <th scope="col" class="text-center col-4">Quantity</th>
+          <th scope="col" class="text-right">Price</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of cart.items">
+        <tr class="align-middle" *ngFor="let item of cart.items">
           <td>
-            <img class="img-thumbnail rounded-circle" [src]=item.imageUrl>
+            <img class="img-thumbnail rounded-circle" [src]="item.imageUrl" />
           </td>
           <td>{{ item.title }}</td>
-          <td  style="padding-top: 31px;">
+          <td>
             <product-quantity
+              class="d-flex justify-content-evenly"
               [shopping-cart]="cart"
               [product]="item"
             ></product-quantity>
           </td>
-          <td>{{ item.totalPrice | currency : "USD" }}</td>
+          <td>
+            {{ item.totalPrice | currency : "USD" }}
+          </td>
         </tr>
       </tbody>
       <tfoot>
@@ -35,8 +47,13 @@
         </tr>
       </tfoot>
     </table>
-    <button (click)="clearCart()" class="btn btn-danger btn-sm">
-      Clear Shopping Cart
-    </button>
+    <a
+      *ngIf="cart.items.length"
+      routerLink="/check-out"
+      class="btn btn-primary"
+    >
+      Check Out
+    </a>
+    
   </ng-container>
 </div>

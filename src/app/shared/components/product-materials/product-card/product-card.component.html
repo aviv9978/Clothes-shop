@@ -6,11 +6,11 @@
       {{ product.price | currency : "USD" }}
     </p>
   </div>
-  <div *ngIf="showActions && shoppingCart" class="card-footer d-grid gap-2">
+  <div *ngIf="showActions && shoppingCart" class="card-footer">
     <button
       *ngIf="shoppingCart.getQuantity(product) === 0; else updateQuantity"
       (click)="addToCart(product)"
-      class="btn btn-primary btn-block"
+      class="btn btn-primary w-100"
     >
       Add to Cart
     </button>

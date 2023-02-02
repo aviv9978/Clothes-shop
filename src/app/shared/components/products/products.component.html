@@ -1,7 +1,7 @@
 <section class="bg-light pt-5 pb-5 shadow-sm">
   <div class="container">
     <div class="row">
-      <div class="col-2">
+      <div class="col-3">
         <products-filter
           class="sticky-top"
           [category]="category"
@@ -10,11 +10,12 @@
 
       <div class="col">
         <div
-          class="row row-cols-1 row-cols-md-2 g-4"
+          class="row row-cols-md-2 g-4"
+         
           *ngIf="cart$ | async as cart"
         >
           <ng-container *ngFor="let product of filteredProducts; let i = index">
-            <div class="col">
+            <div class="col d-flex justify-content-center">
               <product-card
                 [product]="product"
                 [shopping-cart]="cart"

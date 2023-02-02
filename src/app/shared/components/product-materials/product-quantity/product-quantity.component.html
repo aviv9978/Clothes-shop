@@ -1,15 +1,13 @@
-<div class="row g-3  ">
-    <div class="col-2">
-        <button
-            (click)="removeFromCart()"
-            class="btn btn-secondary btn-block">-</button>
-    </div>
-    <div class="col text-center quantity">
-        {{ shoppingCart.getQuantity(product) }} in cart
-    </div>
-    <div class="col-2">
-        <button
-            (click)="addToCart()"
-            class="btn btn-secondary btn-block">+</button>
-    </div>
+<div class="row no-gutters">
+  <div class="col-2 pe-1">
+    <button (click)="removeFromCart()" class="btn btn-secondary btn-block">
+      -
+    </button>
+  </div>
+  <div class="col-8 p-0 text-center">
+    {{ shoppingCart.getQuantity(product) }} in cart
+  </div>
+  <div class="col-2 ps-1">
+    <button (click)="addToCart()" class="btn btn-secondary btn-block">+</button>
+  </div>
 </div>

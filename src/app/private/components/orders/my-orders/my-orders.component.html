@@ -1,1 +1,7 @@
-<p>my-orders works!</p>
+<table class="table">
+  <ul class="group-list group-list-flush">
+    <li *ngFor="let order of orders$ | async" class="group-list-item">
+      {{order.shipping.name}}
+    </li>
+  </ul>
+</table>

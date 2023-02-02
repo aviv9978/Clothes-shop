@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(afAuth: AngularFireAuth, private userService: UserService) {
     this.user$ = afAuth.authState;
-    console.log(this.user$);
   }
 
   get appUser$(): Observable<AppUser | null> {

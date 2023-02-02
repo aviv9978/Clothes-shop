@@ -36,6 +36,10 @@ import { AdminProductsComponent } from './private/components/admin/admin-product
 import { PrivateModule } from './private/private.module';
 import { PublicComponent } from './public/public.component';
 import { SharedModule } from './shared/shared.module';
+import { ShoppingCartSummaryComponent } from './private/components/shipping/shopping-cart-summary/shopping-cart-summary.component';
+import { ShippingFormComponent } from './private/components/shipping/shipping-form/shipping-form.component';
+import { ViewOrderComponent } from './private/components/admin/view-order/view-order.component';
+import { OrderDetailsComponent } from './private/components/orders/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,20 @@ import { SharedModule } from './shared/shared.module';
     ProductCardComponent,
     ProductsFilterComponent,
     ProductQuantityComponent,
+    ShoppingCartSummaryComponent,
+    ShippingFormComponent,
+    OrderDetailsComponent,
+    ViewOrderComponent,
   ],
+  providers: [
+    AuthService,
+    AuthGuard,
+    UserService,
+    CategoryService,
+    ProductService,
+    ShoppingCartService,
+  ],
+  bootstrap: [AppComponent],
   imports: [
     SharedModule,
     CustomFormsModule,
@@ -67,14 +84,5 @@ import { SharedModule } from './shared/shared.module';
     PrivateModule,
     PublicModule,
   ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    UserService,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-  ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}
