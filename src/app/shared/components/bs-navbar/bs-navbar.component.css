@@ -1,13 +1,17 @@
-.drop-position {
-  position: absolute;
-  inset: 0px auto auto 0px;
-  margin: 0px;
-  transform: translate3d(0px, 34px, 0px);
-}
+
 
 .dropdown-toggle {
   cursor: pointer;
 }
 .dropdown-item {
   cursor: pointer;
+}
+
+.bi {
+  font-size: 26px;
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
 }

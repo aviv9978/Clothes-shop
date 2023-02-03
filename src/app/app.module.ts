@@ -1,75 +1,49 @@
-import { AuthService } from './core/authentication/auth.service';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
-import { BsNavbarComponent } from './shared/components/bs-navbar/bs-navbar.component';
-import { ShoppingCartComponent } from './public/components/shopping-cart/shopping-cart.component';
-import { CheckOutComponent } from './private/components/orders/check-out/check-out.component';
-import { OrderSuccessComponent } from './private/components/orders/order-success/order-success.component';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryService } from './shared/services/database/category.service';
-import { ProductService } from './shared/services/database/product.service';
-import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialsModule } from './shared/modules/angular-materials.module';
-import { ShoppingCartService } from './shared/services/database/shopping-cart.service';
-import { ProductCardComponent } from './shared/components/product-materials/product-card/product-card.component';
-import { AuthGuard } from './core/guards/auth-guard.service';
-import { UserService } from './core/services/user.service';
-import { PublicModule } from './public/public.module';
-import { AdminOrdersComponent } from './private/components/admin/admin-orders/admin-orders.component';
-import { ProductFormComponent } from './private/components/admin/product-form/product-form.component';
-import { LoginComponent } from './public/components/login/login.component';
-import { ProductsFilterComponent } from './shared/components/product-materials/products-filter/products-filter.component';
-import { MyOrdersComponent } from './private/components/orders/my-orders/my-orders.component';
-import { HomeComponent } from './public/components/home/home.component';
-import { ProductQuantityComponent } from './shared/components/product-materials/product-quantity/product-quantity.component';
-import { ProductsComponent } from './shared/components/products/products.component';
+
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { AdminProductsComponent } from './private/components/admin/admin-products/admin-products.component';
-import { PrivateModule } from './private/private.module';
-import { PublicComponent } from './public/public.component';
-import { SharedModule } from './shared/shared.module';
-import { ShoppingCartSummaryComponent } from './private/components/shipping/shopping-cart-summary/shopping-cart-summary.component';
-import { ShippingFormComponent } from './private/components/shipping/shipping-form/shipping-form.component';
-import { ViewOrderComponent } from './private/components/admin/view-order/view-order.component';
+import { CheckOutComponent } from './private/components/orders/check-out/check-out.component';
+import { MyOrdersComponent } from './private/components/orders/my-orders/my-orders.component';
 import { OrderDetailsComponent } from './private/components/orders/order-details/order-details.component';
+import { OrderSuccessComponent } from './private/components/orders/order-success/order-success.component';
+import { ShippingFormComponent } from './private/components/shipping/shipping-form/shipping-form.component';
+import {
+  ShoppingCartSummaryComponent,
+} from './private/components/shipping/shopping-cart-summary/shopping-cart-summary.component';
+import { PrivateModule } from './private/private.module';
+import { HomeComponent } from './public/components/home/home.component';
+import { ShoppingCartComponent } from './public/components/shopping-cart/shopping-cart.component';
+import { PublicComponent } from './public/public.component';
+import { PublicModule } from './public/public.module';
+import { BsNavbarComponent } from './shared/components/bs-navbar/bs-navbar.component';
+import { AngularMaterialsModule } from './shared/modules/angular-materials.module';
+import { SharedModule } from './shared/shared.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
 
 @NgModule({
   declarations: [
     AppComponent,
     BsNavbarComponent,
     HomeComponent,
-    ProductsComponent,
     ShoppingCartComponent,
     CheckOutComponent,
     OrderSuccessComponent,
     MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
-    ProductFormComponent,
-    ProductCardComponent,
-    ProductsFilterComponent,
-    ProductQuantityComponent,
     ShoppingCartSummaryComponent,
     ShippingFormComponent,
     OrderDetailsComponent,
-    ViewOrderComponent,
   ],
-  providers: [
-    AuthService,
-    AuthGuard,
-    UserService,
-    CategoryService,
-    ProductService,
-    ShoppingCartService,
-  ],
+  providers: [],
   bootstrap: [AppComponent],
   imports: [
     SharedModule,
@@ -83,6 +57,11 @@ import { OrderDetailsComponent } from './private/components/orders/order-details
     BrowserAnimationsModule,
     PrivateModule,
     PublicModule,
+    FontAwesomeModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    
   ],
 })
 export class AppModule {}

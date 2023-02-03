@@ -5,7 +5,6 @@ import { ShoppingCartService } from '../../services/database/shopping-cart.servi
 import { ShoppingCart } from '../../models/shopping-cart';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/core/services/login.service';
-
 @Component({
   selector: 'bs-navbar',
   templateUrl: './bs-navbar.component.html',
@@ -14,6 +13,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 export class BsNavbarComponent implements OnInit {
   appUser!: AppUser;
   cart$!: Observable<ShoppingCart>;
+
   constructor(
     private auth: AuthService,
     private loginService: LoginService,

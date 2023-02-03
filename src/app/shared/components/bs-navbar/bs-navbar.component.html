@@ -1,26 +1,16 @@
-<header class="p-3 border-bottom">
-  <div class="container-fluid">
-    <div
-      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-    >
-      <a
-        href="/"
-        class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
-      >
-        <img
-          class="bi me-2"
-          width="40"
-          height="32"
-          aria-label="Bootstrap"
-          role="img"
-        />
-      </a>
-      <ul
-        class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
-      >
-        <li>
-          <a routerLink="/shopping-cart" class="nav-link px-2 link-dark">
-            Shopping Cart
+<nav class="navbar navbar-expand-lg border-bottom bg-white bg-light fixed-top">
+  <div class="container">
+    <a class="navbar-brand">
+      <i class="bi bi-shop"></i>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a routerLink="/shopping-cart"  class=" px-2 link-dark">
+            <i style="font-size: 26px" class="bi bi-cart2"> </i>
             <span
               *ngIf="cart$ | async as cart"
               class="badge rounded-pill text-bg-warning"
@@ -29,33 +19,19 @@
             </span>
           </a>
         </li>
-        <li *ngIf="!appUser">
+        <li class="nav-item" *ngIf="!appUser">
           <a routerLink="/login" class="nav-link px-2 link-dark">Login</a>
         </li>
       </ul>
+      <ul class="navbar-nav  mb-2 mb-lg-0">
 
-      <div *ngIf="appUser" ngbDropdown class="dropdown text-end">
-        <a
-          ngbDropdownToggle
-          class="d-block link-dark text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="true"
-        >
+      </ul>
+
+      <li *ngIf="appUser" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
           {{ appUser.name }}
-          <!-- <img
-            *ngIf="user.photoURL"
-            src="{{ user.photoURL }}"
-            alt="mdo"
-            width="32"
-            height="32"
-            class="rounded-circle"
-          /> -->
         </a>
-        <ul
-          ngbDropdownMenu
-          class="dropdown-menu text-small drop-position"
-          data-popper-placement="bottom-start"
-        >
+        <ul class="dropdown-menu dropdown-menu-lg-end">
           <li>
             <a class="dropdown-item" routerLink="/my/orders">My orders</a>
           </li>
@@ -76,7 +52,7 @@
             <a class="dropdown-item" (click)="logout()">Log Out</a>
           </li>
         </ul>
-      </div>
+      </li>
     </div>
   </div>
-</header>
+</nav>
